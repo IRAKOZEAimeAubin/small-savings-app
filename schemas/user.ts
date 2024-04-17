@@ -43,4 +43,28 @@ export const LoginSchema = z.object({
     .refine((value) => /\W|_/.test(value), {
       message: 'Must contain at least one special character',
     }),
+} )
+
+export const ResetSchema = z.object({
+  email: z.string().email({message: 'Must be a valid email address'}),
+} )
+
+export const NewPasswordSchema = z.object({
+  password: z
+    .string()
+    .refine((value) => value.length >= 12, {
+      message: 'Must be 12 or more characters long',
+    })
+    .refine((value) => /[a-z]/.test(value), {
+      message: 'Must contain at least one lowercase letter',
+    })
+    .refine((value) => /[A-Z]/.test(value), {
+      message: 'Must contain at least one uppercase letter',
+    })
+    .refine((value) => /[0-9]/.test(value), {
+      message: 'Must contain at least one number',
+    })
+    .refine((value) => /\W|_/.test(value), {
+      message: 'Must contain at least one special character',
+    }),
 })
