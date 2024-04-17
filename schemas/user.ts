@@ -43,7 +43,8 @@ export const LoginSchema = z.object({
     .refine((value) => /\W|_/.test(value), {
       message: 'Must contain at least one special character',
     }),
-} )
+  code: z.optional(z.string()),
+})
 
 export const ResetSchema = z.object({
   email: z.string().email({message: 'Must be a valid email address'}),
